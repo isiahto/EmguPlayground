@@ -16,8 +16,8 @@ namespace EmguTest
 {
     public partial class Form1 : Form
     {
-        private static string IMAGE_PATH = @"C:\Users\Isiah\Pictures\cotn\templates\Cadence.png";
-
+        // private static string IMAGE_PATH = @"C:\Users\Isiah\Pictures\cotn\templates\Cadence.png";
+        private static string IMAGE_PATH = @"C:\Users\Isiah\Pictures\cotn\templates\test.png";
         private static Image<Rgba, byte> DEFAULT_IMAGE = new Image<Rgba, byte>(IMAGE_PATH);
 
         public Form1()
@@ -123,16 +123,31 @@ namespace EmguTest
          * 2. Create a transparent test image
          * 3. Test the save functionality
          */
+
+        private static string SAVE_TO = @"C:\Users\Isiah\Pictures\cotn\templates\test_save.png";
         private void btn_save_Click(object sender, EventArgs e)
         {
-            var d = new SaveFileDialog();
-            
+            // hard code for now
+            /* Test
+             * 1. IImage.Save
+             * 2. Image<Rgba, byte>.Save
+             */
 
-            if (d.ShowDialog() == DialogResult.OK)
-            {
-                var path = d.FileName;
-                DEFAULT_IMAGE.Save(path);
-            }
+            // 1.
+            imgBox.Image.Save(SAVE_TO);
+
+            // 2.
+            // var canvasImage = imgBox.Image;
+
+
+            //var d = new SaveFileDialog();
+            //if (d.ShowDialog() == DialogResult.OK)
+            //{
+            //    var path = d.FileName;
+            //    DEFAULT_IMAGE.Save(path);
+            //}
+
+            Console.WriteLine("Save completed");
         }
     }
 }
