@@ -1,4 +1,5 @@
-﻿using Emgu.CV.Structure;
+﻿using System.IO;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,16 +91,15 @@ namespace EmguTest
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            // restored processed image
-            // 1. load the image to be processed (test image with transparent background)
-            // 2. Process (which the processed image is stored in the program)
-            // 3. Swtich to antoher image (candence)
-            // 4. Restore the verfiy the transparency retains.
-            
-            // 5. Result: Transparency lost. :(
-            if (Processed != null)
+            var sd = new SaveFileDialog();
+            if (sd.ShowDialog() == DialogResult.OK)
             {
-                picBox.Image = Processed.ToBitmap();
+                picBox.Image.Save(sd.FileName);
+                Console.WriteLine("File saved!");
+            }
+            else
+            {
+                Console.WriteLine("File did not save...");
             }
         }
 
