@@ -25,6 +25,7 @@ namespace EmguTest
         private void btn_reset_Click(object sender, EventArgs e)
         {
             picBox.Image = Image.FromFile(FILE_PATH_IMAGE);
+            
         }
 
         private void btn_tpreset_Click(object sender, EventArgs e)
@@ -33,42 +34,58 @@ namespace EmguTest
             var i = Image.FromFile(FILE_PATH_TEST_IMAGE);
             var b = new Bitmap(i);
             var hasAlpha = Image.IsAlphaPixelFormat(b.PixelFormat);
+
+            However, it has been verified that:
+                Image<Rgba, byte>().ToBitmap()
+            does not display transparent data, because PNG USE BGRA !!!
             */
-            picBox.Image = Image.FromFile(FILE_PATH_TEST_IMAGE);
+            // picBox.Image = Image.FromFile(FILE_PATH_TEST_IMAGE);
+            picBox.Image = new Emgu.CV.Image<Bgra, byte>(FILE_PATH_TEST_IMAGE).ToBitmap();
         }
 
         private void btn_process_Click(object sender, EventArgs e)
         {
             var image = picBox.Image;
-            var src = new Emgu.CV.Image<Rgba, byte>(new Bitmap(image));
+            var src = new Emgu.CV.Image<Bgra, byte>(new Bitmap(image));
+            SplitChannels(src);
 
-            rgba = src.Split(); // 4 grayscale
+            // Perform binary thresolding here:
+            var channels = src.Split();
+            var alpha = channels[3];
+            var g = src.Convert<Gray, byte>();
 
-            var dst = new Emgu.CV.Image<Rgba, byte>(
+            // right now, alpha is all 255 (full white)
+            // we need to apply thresold so that:
+            // if it is black (or super low like < 5) then assign to 0;
+            // Otherwise, it should be part of the image hence alpha = 255;
+            var newAlpha = g.ThresholdBinary(new Gray(10), new Gray(255));
+
+            var newImage = new Emgu.CV.Image<Bgra, byte>(
+                new Emgu.CV.Image<Gray, byte>[] 
+                {
+                    channels[0],
+                    channels[1],
+                    channels[2],
+                    newAlpha
+                });
+
+            picBox.Image = newImage.ToBitmap();
+        }
+
+        private void SplitChannels(Emgu.CV.Image<Bgra, byte> src)
+        {
+            bgra = src.Split(); // 4 grayscale
+
+            var dst = new Emgu.CV.Image<Bgra, byte>(
                 new Emgu.CV.Image<Gray, byte>[]
                 {
-                    rgba[0],
-                    rgba[1],
-                    rgba[2],
-                    rgba[3]
+                    bgra[0],
+                    bgra[1],
+                    bgra[2],
+                    bgra[3]
                 });
 
             Processed = dst;
-        }
-
-        private static Emgu.CV.Image<Gray, byte>[] rgba;
-        private static Emgu.CV.Image<Rgba, byte> Processed { get; set; }
-
-        private void DisplayChannelImage(Emgu.CV.Image<Gray, byte> channel)
-        {
-            if (channel != null)
-            {
-                picBox.Image = channel.ToBitmap();
-            }
-            else
-            {
-                Console.WriteLine("Channel is null! Check splitting => rgba process.");
-            }
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -86,24 +103,42 @@ namespace EmguTest
             }
         }
 
+        private static Emgu.CV.Image<Gray, byte>[] bgra;
+        private static Emgu.CV.Image<Bgra, byte> Processed { get; set; }
+
+        #region Debug channel splitting
+        private void DisplayChannelImage(Emgu.CV.Image<Gray, byte> channel)
+        {
+            if (channel != null)
+            {
+                picBox.Image = channel.ToBitmap();
+            }
+            else
+            {
+                Console.WriteLine("Channel is null! Check splitting => rgba process.");
+            }
+        }
+
         private void btn_c1_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba?[0]);
+            DisplayChannelImage(bgra?[0]);
         }
 
         private void btn_c2_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba?[1]);
+            DisplayChannelImage(bgra?[1]);
         }
 
         private void btn_c3_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba?[2]);
+            DisplayChannelImage(bgra?[2]);
         }
 
         private void btn_c4_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba?[3]);
+            DisplayChannelImage(bgra?[3]);
         }
+        #endregion
+
     }
 }
