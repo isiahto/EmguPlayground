@@ -24,17 +24,17 @@ namespace EmguTest
         {
             InitializeComponent();
             InitImage();
-            //LoadImageData();
-            //RunTemplateMatching();
         }
 
         private void InitImage()
         {
-            SetImage(DEFAULT_IMAGE);
+            // This does, load image transparency!!
+            imgBox.ImageLocation = IMAGE_PATH;
+            imgBox.Load();
+            
+            // V: below doesnt load the transparency from the image
+            // imgBox.Image = new Image<Rgba, byte>(IMAGE_PATH);
         }
-
-        private void SetImage(IImage src)
-            => imgBox.Image = src;
 
        
 
@@ -102,6 +102,8 @@ namespace EmguTest
 
         private void LoadImageData()
         {
+            var i = new Image<Rgba, byte>(IMAGE_PATH);
+
             var src = new Bitmap(Image.FromFile(IMAGE_PATH));
             ConvertBlackToTransparent(src);
             // imgBox.Image = new Image<Rgba, byte>(src);
