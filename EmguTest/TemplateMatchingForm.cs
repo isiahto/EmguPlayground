@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Emgu.CV;
+using Emgu.CV.Structure;
 
 namespace EmguTest
 {
@@ -30,7 +31,24 @@ namespace EmguTest
 
         private void btn_match_Click(object sender, EventArgs e)
         {
-            
+            var src = new Image<Bgra, byte>(IMAGE_MAIN);
+            var tmp = new Image<Bgra, byte>(IMAGE_TEMPLATE);
+            var final = src.Copy();
+
+            using (var result = src.MatchTemplate(tmp, Emgu.CV.CvEnum.TemplateMatchingType.CcoeffNormed))
+            {
+                result.MinMax(out double[] minValues, out double[] maxValues, out Point[] minLocations, out Point[] maxLocations);
+
+                // Confident rate @ 0.39 (pretty low)
+                // TODO: try out different templates!
+                if (maxValues[0] > 0.1)
+                {
+                    Rectangle match = new Rectangle(maxLocations[0], tmp.Size);
+                    final.Draw(match, new Bgra(0, 0, 155, 255), 3);
+                }
+            }
+
+            pictureBox.Image = final.ToBitmap();
         }
     }
 }
