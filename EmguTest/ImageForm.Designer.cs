@@ -103,7 +103,6 @@
             // 
             // btn_c1
             // 
-            this.btn_c1.Enabled = false;
             this.btn_c1.Location = new System.Drawing.Point(278, 12);
             this.btn_c1.Name = "btn_c1";
             this.btn_c1.Size = new System.Drawing.Size(75, 23);
@@ -114,7 +113,6 @@
             // 
             // btn_c2
             // 
-            this.btn_c2.Enabled = false;
             this.btn_c2.Location = new System.Drawing.Point(278, 41);
             this.btn_c2.Name = "btn_c2";
             this.btn_c2.Size = new System.Drawing.Size(75, 23);
@@ -125,7 +123,6 @@
             // 
             // btn_c3
             // 
-            this.btn_c3.Enabled = false;
             this.btn_c3.Location = new System.Drawing.Point(278, 70);
             this.btn_c3.Name = "btn_c3";
             this.btn_c3.Size = new System.Drawing.Size(75, 23);
@@ -136,7 +133,6 @@
             // 
             // btn_c4
             // 
-            this.btn_c4.Enabled = false;
             this.btn_c4.Location = new System.Drawing.Point(278, 99);
             this.btn_c4.Name = "btn_c4";
             this.btn_c4.Size = new System.Drawing.Size(75, 23);

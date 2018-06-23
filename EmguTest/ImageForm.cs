@@ -53,29 +53,22 @@ namespace EmguTest
                     rgba[3]
                 });
 
-            if (rgba != null && rgba.Length == 4)
-            {
-                EnableChannelButtons();
-            }
-
             Processed = dst;
         }
 
         private static Emgu.CV.Image<Gray, byte>[] rgba;
         private static Emgu.CV.Image<Rgba, byte> Processed { get; set; }
 
-        private void EnableChannelButtons()
-        {
-            btn_c1.Enabled = btn_c2.Enabled = btn_c3.Enabled = btn_c4.Enabled = true;
-        }
-        private void DisableChannelButtons()
-        {
-            btn_c1.Enabled = btn_c2.Enabled = btn_c3.Enabled = btn_c4.Enabled = false;
-        }
-
         private void DisplayChannelImage(Emgu.CV.Image<Gray, byte> channel)
         {
-            picBox.Image = channel.ToBitmap();
+            if (channel != null)
+            {
+                picBox.Image = channel.ToBitmap();
+            }
+            else
+            {
+                Console.WriteLine("Channel is null! Check splitting => rgba process.");
+            }
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -95,22 +88,22 @@ namespace EmguTest
 
         private void btn_c1_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba[0]);
+            DisplayChannelImage(rgba?[0]);
         }
 
         private void btn_c2_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba[1]);
+            DisplayChannelImage(rgba?[1]);
         }
 
         private void btn_c3_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba[2]);
+            DisplayChannelImage(rgba?[2]);
         }
 
         private void btn_c4_Click(object sender, EventArgs e)
         {
-            DisplayChannelImage(rgba[3]);
+            DisplayChannelImage(rgba?[3]);
         }
     }
 }
