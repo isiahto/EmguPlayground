@@ -80,6 +80,7 @@
             this.ddl_scene.Name = "ddl_scene";
             this.ddl_scene.Size = new System.Drawing.Size(121, 21);
             this.ddl_scene.TabIndex = 5;
+            this.ddl_scene.SelectedIndexChanged += new System.EventHandler(this.ddl_scene_SelectedIndexChanged);
             // 
             // ddl_template
             // 
@@ -88,6 +89,7 @@
             this.ddl_template.Name = "ddl_template";
             this.ddl_template.Size = new System.Drawing.Size(121, 21);
             this.ddl_template.TabIndex = 6;
+            this.ddl_template.SelectedIndexChanged += new System.EventHandler(this.ddl_template_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -149,7 +151,6 @@
             this.ib_scene.Location = new System.Drawing.Point(12, 12);
             this.ib_scene.Name = "ib_scene";
             this.ib_scene.Size = new System.Drawing.Size(607, 387);
-            this.ib_scene.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ib_scene.TabIndex = 2;
             this.ib_scene.TabStop = false;
             // 
