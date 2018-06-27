@@ -17,20 +17,33 @@ namespace EmguTest
         public TemplateMatchingForm()
         {
             InitializeComponent();
-            InitImages();
+
+            InitDropDownLists();
         }
 
         private static string IMAGE_MAIN = @"C:\Users\Isiah\Pictures\cotn\level.jpg";
         private static string IMAGE_TEMPLATE = @"C:\Users\Isiah\Pictures\cotn\templates\Cadence_trans.png";
 
-        private void InitImages()
+        private void InitDropDownLists()
         {
-            pictureBox.Image = Image.FromFile(IMAGE_MAIN);
-            templateBox.Image = Image.FromFile(IMAGE_TEMPLATE);
+            // Init Scene ddl
+            var i0 = new KeyValuePair<string, string>("", "na");
+            var i1 = new KeyValuePair<string, string>("key", "value");
+
+            ddl_scene.Items.Add(i0);
+            ddl_scene.Items.Add(i1);
+            ddl_scene.SelectedIndex = 0;
+
+            ddl_scene.DisplayMember = ((KeyValuePair<string, string>)ddl_scene.SelectedItem).Key;
+            ddl_scene.ValueMember = ((KeyValuePair<string, string>)ddl_scene.SelectedItem).Value;
+
+
+            // Init Tempalte ddl
         }
 
         private void btn_match_Click(object sender, EventArgs e)
         {
+            return;
             var src = new Image<Bgra, byte>(IMAGE_MAIN);
             var tmp = new Image<Bgra, byte>(IMAGE_TEMPLATE);
             var final = src.Copy();
@@ -48,7 +61,13 @@ namespace EmguTest
                 }
             }
 
-            pictureBox.Image = final.ToBitmap();
+            //pictureBox.Image = final.ToBitmap();
+        }
+
+        private void btn_debug_Click(object sender, EventArgs e)
+        {
+            var selectedItem = ddl_scene.SelectedItem;
+
         }
     }
 }
