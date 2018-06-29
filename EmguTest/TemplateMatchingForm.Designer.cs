@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.btn_match = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_confidence = new System.Windows.Forms.TextBox();
+            this.txt_location = new System.Windows.Forms.TextBox();
             this.ddl_scene = new System.Windows.Forms.ComboBox();
             this.ddl_template = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,21 +57,21 @@
             this.btn_match.UseVisualStyleBackColor = true;
             this.btn_match.Click += new System.EventHandler(this.btn_match_Click);
             // 
-            // textBox1
+            // txt_confidence
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(701, 173);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.txt_confidence.Enabled = false;
+            this.txt_confidence.Location = new System.Drawing.Point(701, 173);
+            this.txt_confidence.Name = "txt_confidence";
+            this.txt_confidence.Size = new System.Drawing.Size(100, 20);
+            this.txt_confidence.TabIndex = 3;
             // 
-            // textBox2
+            // txt_location
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(701, 203);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.txt_location.Enabled = false;
+            this.txt_location.Location = new System.Drawing.Point(701, 203);
+            this.txt_location.Name = "txt_location";
+            this.txt_location.Size = new System.Drawing.Size(100, 20);
+            this.txt_location.TabIndex = 4;
             // 
             // ddl_scene
             // 
@@ -191,8 +191,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ddl_template);
             this.Controls.Add(this.ddl_scene);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_location);
+            this.Controls.Add(this.txt_confidence);
             this.Controls.Add(this.btn_match);
             this.Name = "TemplateMatchingForm";
             this.Text = "TemplateMatchingForm";
@@ -205,8 +205,8 @@
 
         #endregion
         private System.Windows.Forms.Button btn_match;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_confidence;
+        private System.Windows.Forms.TextBox txt_location;
         private System.Windows.Forms.ComboBox ddl_scene;
         private System.Windows.Forms.ComboBox ddl_template;
         private System.Windows.Forms.Label label1;

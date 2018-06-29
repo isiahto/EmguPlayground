@@ -86,6 +86,9 @@ namespace EmguTest
                 if (maxValues[0] > 0.1)
                 {
                     Rectangle match = new Rectangle(maxLocations[0], templateImg.Size);
+                    txt_confidence.Text = maxValues[0].ToString();
+                    txt_location.Text = maxLocations[0].ToString();
+
                     final.Draw(match, new Bgr(0, 0, 155), 3);
                 }
             }

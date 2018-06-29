@@ -14,8 +14,7 @@ namespace EmguTest
 {
     public partial class ImageForm : Form
     {
-        private static string FILE_PATH_TEST_IMAGE = @"C:\Users\Isiah\Pictures\cotn\templates\test.png";
-        private static string FILE_PATH_IMAGE = @"C:\Users\Isiah\Pictures\cotn\templates\Cadence.png";
+        private static string FILE_PATH_IMAGE = @"Images\Sprites\Entities\Cadence.png";
 
 
         public ImageForm()
@@ -25,7 +24,7 @@ namespace EmguTest
 
         private void btn_reset_Click(object sender, EventArgs e)
         {
-            picBox.Image = Image.FromFile(FILE_PATH_IMAGE);
+            picBox.Image = Image.FromFile(Path.Combine(Environment.CurrentDirectory, FILE_PATH_IMAGE));
             
         }
 
@@ -41,7 +40,7 @@ namespace EmguTest
             does not display transparent data, because PNG USE BGRA !!!
             */
             // picBox.Image = Image.FromFile(FILE_PATH_TEST_IMAGE);
-            picBox.Image = new Emgu.CV.Image<Bgra, byte>(FILE_PATH_TEST_IMAGE).ToBitmap();
+            picBox.Image = new Emgu.CV.Image<Bgra, byte>(Path.Combine(Environment.CurrentDirectory, FILE_PATH_IMAGE)).ToBitmap();
         }
 
         private void btn_process_Click(object sender, EventArgs e)
